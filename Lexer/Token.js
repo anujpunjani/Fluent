@@ -32,9 +32,15 @@ const TokenTypes = Object.freeze({
 });
 
 class Token {
-  constructor(type, value = null) {
+  constructor(type, value = null, positionStart = null, positionEnd = null) {
     this.type = type;
     this.value = value;
+    if (positionStart) {
+      this.positionStart = positionStart.copy();
+      this.positionEnd = positionStart.copy();
+      this.positionEnd.advance();
+    }
+    if (positionEnd) this.positionEnd = positionEnd.copy();
   }
 
   //printing token by converting to string

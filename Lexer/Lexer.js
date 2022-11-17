@@ -31,22 +31,22 @@ class Lexer {
       } else if (Constants.numbers.includes(this.currentChar)) {
         tokens.push(this.makeNumber());
       } else if (this.currentChar == "+") {
-        tokens.push(new Token(TokenTypes.PLUS, null));
+        tokens.push(new Token(TokenTypes.PLUS, this.positionStart));
         this.advance();
       } else if (this.currentChar == "-") {
-        tokens.push(new Token(TokenTypes.MINUS, null));
+        tokens.push(new Token(TokenTypes.MINUS, this.positionStart));
         this.advance();
       } else if (this.currentChar == "*") {
-        tokens.push(new Token(TokenTypes.MUL, null));
+        tokens.push(new Token(TokenTypes.MUL, this.positionStart));
         this.advance();
       } else if (this.currentChar == "/") {
-        tokens.push(new Token(TokenTypes.DIV, null));
+        tokens.push(new Token(TokenTypes.DIV, this.positionStart));
         this.advance();
       } else if (this.currentChar == "(") {
-        tokens.push(new Token(TokenTypes.LPAREN, null));
+        tokens.push(new Token(TokenTypes.LPAREN, this.positionStart));
         this.advance();
       } else if (this.currentChar == ")") {
-        tokens.push(new Token(TokenTypes.RPAREN, null));
+        tokens.push(new Token(TokenTypes.RPAREN, this.positionStart));
         this.advance();
       } else {
         let character = this.currentChar;
@@ -62,13 +62,15 @@ class Lexer {
         };
       }
     }
-
+    tokens.push(new Token(TokenTypes.EOF, null, this.position));
     return { tokens: tokens, errors: null }; //error not found return token
   }
 
   makeNumber() {
     let num = "";
     let dotCount = 0;
+    let positionStart = this.position.copy();
+
     let digits = Constants.numbers + "."; //for float values and decimals ...
     while (this.currentChar != null && digits.includes(this.currentChar)) {
       if (this.currentChar === ".") {
@@ -81,9 +83,19 @@ class Lexer {
     }
 
     if (dotCount === 0) {
-      return new Token(TokenTypes.INT, parseInt(num));
+      return new Token(
+        TokenTypes.INT,
+        parseInt(num),
+        positionStart,
+        this.position
+      );
     } else {
-      return new Token(TokenTypes.FLOAT, parseFloat(num));
+      return new Token(
+        TokenTypes.FLOAT,
+        parseFloat(num),
+        positionStart,
+        this.position
+      );
     }
   }
 }
