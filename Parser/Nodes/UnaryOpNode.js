@@ -9,5 +9,4 @@ class UnaryOpNode {
     return `(${this.operationToken}, ${this.node})`;
   }
 }
-
 module.exports = UnaryOpNode;

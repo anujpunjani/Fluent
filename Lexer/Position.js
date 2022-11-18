@@ -7,7 +7,7 @@ class Position {
     this.fileContent = fileContent;
   }
 
-  advance(currentChar) {
+  advance(currentChar = null) {
     this.index++;
     this.column++;
 

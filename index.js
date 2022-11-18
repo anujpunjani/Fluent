@@ -1,6 +1,7 @@
 const Context = require("./Interpreter/Context");
 const Interpreter = require("./Interpreter/Interpreter");
 const Lexer = require("./Lexer/Lexer");
+const Parser = require("./Parser/parser");
 
 const prompt = require("prompt-sync")({ sigint: true });
 

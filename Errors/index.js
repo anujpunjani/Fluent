@@ -1,20 +1,22 @@
+const { stringWithArrows } = require("../utils");
+
 class FluentError {
   constructor(
     positionStart,
     positionEnd,
     errorName,
-    details,
-    position,
-    fileName,
-    fileContent
+    details
+    //position,
+    //fileName,
+    //fileContent
   ) {
     this.errorName = errorName;
     this.details = details;
     this.positionStart = positionStart;
     this.positionEnd = positionEnd;
-    this.position = position;
-    this.fileName = fileName;
-    this.fileContent = fileContent;
+    //this.position = position;
+    //this.fileName = fileName;
+    //this.fileContent = fileContent;
   }
 
   asError() {
@@ -29,7 +31,13 @@ class FluentError {
       "line: " +
       (this.positionStart.line + 1) +
       "\n";
-
+    result +=
+      "\n" +
+      stringWithArrows(
+        this.positionStart.fileContent,
+        this.positionStart,
+        this.positionEnd
+      );
     return result;
   }
 }
