@@ -1,3 +1,5 @@
+const Context = require("./Interpreter/Context");
+const Interpreter = require("./Interpreter/Interpreter");
 const Lexer = require("./Lexer/Lexer");
 const Parser = require("./Parser/parser");
 
@@ -22,8 +24,22 @@ function run(filename, filecontent) {
 
   const parser = new Parser(tokens);
   let ast = parser.parse(); // ast= abstract syntax tree
-  if (!ast.error) console.log(ast.node.toString());
-  else console.log(ast.error.asError());
+  if (!ast.error) {
+    console.log(ast.node.toString());
+  } else {
+    console.log(ast.error.asError());
+    return;
+  }
+
+  //Inerpreter
+  const interpreter = new Interpreter();
+
+  //Context
+  const context = new Context("<program>");
+
+  let result = interpreter.visit(ast.node, context);
+  if (result.error) console.log(result.error.asError());
+  else console.log(result.value.toString());
 }
 
 while (true) {
