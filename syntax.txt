@@ -1,0 +1,17 @@
+let <var-name> = <expression>
+
+if <condition> {
+    <body>
+}
+
+while <condition> {
+    <body>
+}
+
+for <var-name> until <expression> step <expression> {
+    <body>
+}
+
+define <function-name> (<args>) {
+    <body>
+}
