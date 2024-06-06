@@ -10742,8 +10742,8 @@ const FluentLangSyntax = {
     pattern: /(["'])(?:\\.|(?!\1)[^\\])*\1/,
     greedy: true
   },
-  keyword: /\b(?:and|or|not|if|then|else|elif|for|to|step|while|until|func|return|continue|break|pass)\b/,
-  builtin: /\b(?:print|printReturn|input|clear|isNumber|isList|isFunction|isString|concat|len|run)\b/,
+  keyword: /\b(?:and|or|not|if|else|elif|for|step|while|until|func|return|continue|break|pass)\b/,
+  builtin: /\b(?:print|printReturn|input|isNumber|isList|isFunction|isString|abs|len)\b/,
   boolean: /\b(?:true|false)\b/,
   number: /(?:(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[-+]?\d+)?)i?/i,
   null: {
