@@ -21,7 +21,7 @@ const Header = () => {
             </button>
             <button
               onClick={() =>
-                window.open("https://anujpunjani.github.io/dev/", "_blank")
+                window.open("https://github.com/anujpunjani/Fluent", "_blank")
               }
               className={styles.button}
             >
