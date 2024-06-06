@@ -7620,7 +7620,7 @@ const Header = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
-            onClick: () => window.open("https://anujpunjani.github.io/dev/", "_blank"),
+            onClick: () => window.open("https://github.com/anujpunjani/Fluent", "_blank"),
             className: styles$6.button,
             children: "View Source"
           }
