@@ -1,0 +1,18 @@
+.buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 16px;
+  font-weight: 500;
+
+  .button {
+    display: flex;
+    align-items: center;
+    // border: 2px solid var(--brand);
+    border-radius: 6px;
+    z-index: 10;
+    box-shadow: 5px 5px 0px 0px;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    transition: all 200ms;
+    flex-shrink: 0;
+  }
+}

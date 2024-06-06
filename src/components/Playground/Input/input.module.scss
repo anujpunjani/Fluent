@@ -1,0 +1,39 @@
+.InputContainer {
+  position: relative;
+  margin-left: 1rem;
+  font-family: monospace;
+  font-size: 16;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: 1.5rem;
+  }
+
+  .InputEditor {
+    height: 60vh;
+    width: 20vw;
+    padding: 12px;
+    overflow: auto;
+    tab-size: 4ch;
+    color: #333;
+    background-color: #fff;
+    resize: none;
+    outline: none;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+  .LineNumbers {
+    padding: 12px 4px;
+    background-color: #fff;
+    // border-right: 1px solid #8a8a8a;
+    text-align: center;
+    user-select: none; /* Prevents text selection */
+
+    .LineNumber {
+      padding: 0 0.5rem;
+      color: #8a8a8a;
+    }
+  }
+}

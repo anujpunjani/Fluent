@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "south-garden";
+  src: url("../../assets/fonts/South\ Gardens\ Personal\ Use.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.title {
+  font-family: "south-garden", sans-serif;
+  font-size: 12rem;
+  color: var(--brand);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 80px 50px 20px 0;
+
+  @media (max-width: 768px) {
+    font-size: 8rem;
+    margin: 50px 50px 50px 0;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin: 32px 0 32px 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .button {
+    border: 2px solid var(--brand);
+    border-radius: 6px;
+    z-index: 10;
+    box-shadow: 5px 5px 0px 0px rgba(237, 125, 49, 1);
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    transition: all 200ms;
+    flex-shrink: 0;
+
+    &:hover {
+      box-shadow: 0px 0px 0px 0px;
+    }
+  }
+}

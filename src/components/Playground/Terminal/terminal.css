@@ -1,0 +1,25 @@
+.terminal {
+  overflow-y: scroll;
+  font-family: monospace;
+  transition-property: max-height, padding;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  height: auto;
+  max-height: 30rem;
+  padding: 2rem;
+  opacity: 1;
+}
+
+.terminal .output {
+  opacity: 1;
+  transition: opacity 0.5s;
+  transition-delay: 0.3s;
+}
+
+.terminal-collapsed {
+  max-height: 0;
+  padding: 0;
+  transition-property: max-height, padding;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
