@@ -1,5 +1,5 @@
 # Fluent Programming Language 
-Try out your code on [Fluent PlayGround](https://anujpunjani.github.io/Fluent/).
+Try out your code on [Fluent Playground](https://anujpunjani.github.io/Fluent/).
 
 # Documentation
 ## Syntax
