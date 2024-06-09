@@ -54,23 +54,73 @@ class Lexer {
         tokens.push(new Token(TokenTypes.NEWLINE, null, this.position));
         this.advance();
       } else if (this.currentChar === "+") {
+        let positionStart = this.position.copy();
         tokens.push(new Token(TokenTypes.PLUS, null, this.position));
         this.advance();
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'+=' isn't supported`
+            ),
+          };
       } else if (this.currentChar === "-") {
+        let positionStart = this.position.copy();
         tokens.push(new Token(TokenTypes.MINUS, null, this.position));
         this.advance();
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'-=' isn't supported`
+            ),
+          };
       } else if (this.currentChar === "*") {
+        let positionStart = this.position.copy();
         this.advance();
-        if (this.currentChar === "*") {
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'*=' isn't supported`
+            ),
+          };
+        else if (this.currentChar === "*") {
           tokens.push(new Token(TokenTypes.POW, null, this.position));
           this.advance();
         } else tokens.push(new Token(TokenTypes.MUL, null, this.position));
       } else if (this.currentChar === "/") {
+        let positionStart = this.position.copy();
         tokens.push(new Token(TokenTypes.DIV, null, this.position));
         this.advance();
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'/=' isn't supported`
+            ),
+          };
       } else if (this.currentChar === "%") {
+        let positionStart = this.position.copy();
         tokens.push(new Token(TokenTypes.MOD, null, this.position));
         this.advance();
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'%=' isn't supported`
+            ),
+          };
       } else if (this.currentChar === "(") {
         tokens.push(new Token(TokenTypes.LPAREN, null, this.position));
         this.advance();
@@ -250,7 +300,7 @@ class Lexer {
 
     while (
       this.currentChar != null &&
-      letterNumbers.includes(this.currentChar)
+      (letterNumbers.includes(this.currentChar) || this.currentChar === "_")
     ) {
       identifer += this.currentChar;
       this.advance();

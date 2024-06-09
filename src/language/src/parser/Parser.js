@@ -454,9 +454,9 @@ class Parser {
     } else if (this.currentToken.type == TokenTypes.IDENTIFIER) {
       response.registerAdvancement();
       this.advance();
-
+      let accessNode = new VarAccessNode(token);
       // Index element access for String or List
-      if (this.currentToken.type === TokenTypes.LSQUARE) {
+      while (this.currentToken.type === TokenTypes.LSQUARE) {
         response.registerAdvancement();
         this.advance();
         let expr = response.register(this.expr());
@@ -464,13 +464,11 @@ class Parser {
         if (this.currentToken.type == TokenTypes.RSQUARE) {
           response.registerAdvancement();
           this.advance();
-          return response.success(
-            new IndexAccessNode(
-              new VarAccessNode(token),
-              expr,
-              token.positionStart,
-              this.currentToken.positionEnd
-            )
+          accessNode = new IndexAccessNode(
+            accessNode,
+            expr,
+            token.positionStart,
+            this.currentToken.positionEnd
           );
         } else {
           return response.failure(
@@ -482,7 +480,7 @@ class Parser {
           );
         }
       }
-      return response.success(new VarAccessNode(token));
+      return response.success(accessNode);
     } else if (this.currentToken.type == TokenTypes.LPAREN) {
       response.registerAdvancement();
       this.advance();
@@ -973,6 +971,7 @@ class Parser {
 
     response.registerAdvancement();
     this.advance();
+    response.register(this.continueIfNewLine());
 
     if (this.currentToken.type == TokenTypes.RSQUARE) {
       response.registerAdvancement();
@@ -992,10 +991,12 @@ class Parser {
       while (this.currentToken.type == TokenTypes.COMMA) {
         response.registerAdvancement();
         this.advance();
+        response.register(this.continueIfNewLine());
 
         elementNodes.push(response.register(this.expr()));
         if (response.error) return response;
       }
+      response.register(this.continueIfNewLine());
 
       if (this.currentToken.type != TokenTypes.RSQUARE) {
         return response.failure(

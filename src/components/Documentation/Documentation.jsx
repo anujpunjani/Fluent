@@ -22,6 +22,9 @@ const snippets = [
     description: (
       <>
         Syntax rules of <code>Fluent</code>.
+        <div className="text-red-600 italic">
+          Note: '+=', '-=', '%=', '/=', '*=' are currently not supported.
+        </div>
       </>
     ),
     code: `
@@ -72,6 +75,9 @@ keywords = ["and", "or", "not", "if", "else", "while", "for", "step", "until", "
     description: (
       <>
         Operations that can be performed on data type <code>string</code>.
+        <div className="text-red-600 italic">
+          Note: re-assigning at index currently not supported. str[1] = "s";
+        </div>
       </>
     ),
     code: `
@@ -97,6 +103,9 @@ print(str3); # lllll5
     description: (
       <>
         Operations that can be performed on data type <code>list</code>.
+        <div className="text-red-600 italic">
+          Note: re-assigning at index currently not supported. list[1] = 1;
+        </div>
       </>
     ),
     code: `
