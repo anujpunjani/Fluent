@@ -1,0 +1,8 @@
+can't assign a value to a variable that is already declared ✅
+no boolean type
+no math functions
+no file management functions
+must use curly brackets for if,for,while statements (even for one statemnt)
+REVAMP SYNTAX ✅
+
+EVERY STATEMENT SHOULD END ON SEMICOLON ✅

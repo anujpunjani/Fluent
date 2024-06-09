@@ -2,7 +2,7 @@
   "homepage": "https://anujpunjani.github.io/Fluent",
   "name": "fluent",
   "private": true,
-  "version": "2.0.0",
+  "version": "2.1.0",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",

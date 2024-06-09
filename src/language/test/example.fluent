@@ -1,0 +1,35 @@
+# this is a comment
+
+print("Hello, World!");  
+
+define oopify(x) => x + "oop";
+
+
+define map(elements, func) {
+    let newelements = [];
+    let i = 0;
+    while i < len(elements) {
+        add(newelements, func(elements/i));
+        i = i + 1;
+    }
+    return newelements;
+}
+
+function join(elements, seprator) {
+    let result = "";
+   
+    let length = len(elements);
+    for i = 0 until length {
+        result = result + elements/i;
+        if i < length - 1 {
+            result = result + seprator;
+        }
+    }
+    return result;
+}
+
+for i = 0 until 5 {
+    print(join(map(["l", "sl"], oopify), ", "));
+}
+
+# this is a comment

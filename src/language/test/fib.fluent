@@ -1,0 +1,18 @@
+let a = 0;
+let b = 1;
+
+let num = input();
+
+let list = [];
+
+list = list + a;
+list = list + b;
+
+for i = 0 until num {
+    let c = a + b;
+    a = b;
+    b = c;
+    list = list + c;
+}
+
+print(list);
