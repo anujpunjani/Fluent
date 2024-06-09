@@ -14,7 +14,7 @@ const Input = ({ input, setInput }) => {
         </div>
         <textarea
           className={styles.InputEditor}
-          placeholder="Enter input to program here. Each line is treated as seprate input."
+          placeholder="Enter input to program here. Each line is treated as separate input."
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
