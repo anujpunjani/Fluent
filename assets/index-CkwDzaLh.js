@@ -11398,7 +11398,10 @@ let Number$1 = (_a = class extends Value {
     }
   }
   notted() {
-    return new _a(this.value == 0 ? 1 : 0).setContext(this.context);
+    return {
+      result: new _a(+(this.value == 0 ? 1 : 0)).setContext(this.context),
+      error: null
+    };
   }
   isTrue() {
     return this.value != 0;
@@ -11983,8 +11986,8 @@ class VarAssignNode extends Node {
     super();
     this.varNameToken = varNameToken;
     this.valueNode = valueNode;
-    this.postionStart = this.varNameToken.postionStart;
-    this.postionEnd = this.valueNode.postionEnd;
+    this.positionStart = this.varNameToken.positionStart;
+    this.positionEnd = this.valueNode.positionEnd;
     this.name = "VarAssignNode";
   }
   toString() {
@@ -11996,7 +11999,7 @@ class IfNode extends Node {
     super();
     this.cases = cases;
     this.elseCase = elseCase;
-    this.postionStart = this.cases[0][0].positionStart;
+    this.positionStart = this.cases[0][0].positionStart;
     this.positionEnd = (this.elseCase || this.cases[this.cases.length - 1])[0].positionEnd;
     this.name = "IfNode";
   }
