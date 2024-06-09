@@ -6,7 +6,7 @@ class IfNode extends Node {
     this.cases = cases;
     this.elseCase = elseCase;
 
-    this.postionStart = this.cases[0][0].positionStart;
+    this.positionStart = this.cases[0][0].positionStart;
     this.positionEnd = (this.elseCase ||
       this.cases[this.cases.length - 1])[0].positionEnd;
 

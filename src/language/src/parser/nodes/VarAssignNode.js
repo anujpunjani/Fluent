@@ -5,8 +5,8 @@ class VarAssignNode extends Node {
     super();
     this.varNameToken = varNameToken;
     this.valueNode = valueNode;
-    this.postionStart = this.varNameToken.postionStart;
-    this.postionEnd = this.valueNode.postionEnd;
+    this.positionStart = this.varNameToken.positionStart;
+    this.positionEnd = this.valueNode.positionEnd;
     this.name = "VarAssignNode";
   }
 

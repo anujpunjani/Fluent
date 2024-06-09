@@ -196,7 +196,10 @@ class Number extends Value {
   }
 
   notted() {
-    return new Number(this.value == 0 ? 1 : 0).setContext(this.context);
+    return {
+      result: new Number(+(this.value == 0 ? 1 : 0)).setContext(this.context),
+      error: null,
+    };
   }
 
   isTrue() {
