@@ -11232,7 +11232,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   subbedBy(other) {
     if (other.name == "Number")
@@ -11241,7 +11241,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   multedBy(other) {
     if (other.name == "Number")
@@ -11250,7 +11250,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   diviedBy(other) {
     if (other.name == "Number") {
@@ -11270,7 +11270,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   powerdBy(other) {
     if (other.name == "Number")
@@ -11279,7 +11279,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   moddedBy(other) {
     if (other.name == "Number") {
@@ -11299,7 +11299,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   getComparisonEq(other) {
     if (other.name == "Number") {
@@ -11310,7 +11310,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonNe(other) {
@@ -11322,7 +11322,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonLt(other) {
@@ -11334,7 +11334,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonGt(other) {
@@ -11346,7 +11346,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonLte(other) {
@@ -11358,7 +11358,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonGte(other) {
@@ -11370,7 +11370,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   andedBy(other) {
@@ -11382,7 +11382,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   oredBy(other) {
@@ -11394,7 +11394,7 @@ let Number$1 = (_a = class extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   notted() {
@@ -11436,8 +11436,15 @@ let String$1 = class String2 extends Value {
         ),
         error: null
       };
+    else if (other.name == "List")
+      return {
+        result: new String2(this.value + other.toString()).setContext(
+          this.context
+        ),
+        error: null
+      };
     else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   multedBy(other) {
     if (other.name == "Number") {
@@ -11447,7 +11454,7 @@ let String$1 = class String2 extends Value {
         error: null
       };
     } else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   getIndex(other) {
     if (other.name == "Number") {
@@ -11464,7 +11471,7 @@ let String$1 = class String2 extends Value {
           result: null
         };
     } else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   getComparisonEq(other) {
     if (other.name == "String") {
@@ -11475,7 +11482,7 @@ let String$1 = class String2 extends Value {
         )
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonNe(other) {
@@ -11487,7 +11494,7 @@ let String$1 = class String2 extends Value {
         )
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonLt(other) {
@@ -11499,7 +11506,7 @@ let String$1 = class String2 extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonGt(other) {
@@ -11511,7 +11518,7 @@ let String$1 = class String2 extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonLte(other) {
@@ -11523,7 +11530,7 @@ let String$1 = class String2 extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   getComparisonGte(other) {
@@ -11535,7 +11542,7 @@ let String$1 = class String2 extends Value {
         error: null
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   oredBy(other) {
@@ -11545,7 +11552,7 @@ let String$1 = class String2 extends Value {
         result: this.value || other.value ? Number$1.true : Number$1.false
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   andedBy(other) {
@@ -11555,7 +11562,7 @@ let String$1 = class String2 extends Value {
         result: this.value && other.value ? Number$1.true : Number$1.false
       };
     } else {
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
     }
   }
   isTrue() {
@@ -12324,7 +12331,7 @@ class List extends Value {
         };
       }
     } else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   multedBy(other) {
     if (other.name == "List") {
@@ -12332,7 +12339,7 @@ class List extends Value {
       newList.elements = newList.elements.concat(other.elements);
       return { result: newList, error: null };
     } else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   getIndex(other) {
     if (other.name == "Number") {
@@ -12349,7 +12356,7 @@ class List extends Value {
           result: null
         };
     } else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   diviedBy(other) {
     if (other.name == "Number") {
@@ -12366,7 +12373,7 @@ class List extends Value {
           result: null
         };
     } else
-      return { error: this.illegalOperation(this, other), result: null };
+      return this.illegalOperation(this, other);
   }
   copy() {
     let copy = new List(this.elements);
