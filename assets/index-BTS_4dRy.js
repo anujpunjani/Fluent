@@ -12877,24 +12877,74 @@ class Lexer {
         tokens.push(new Token(TokenTypes.NEWLINE, null, this.position));
         this.advance();
       } else if (this.currentChar === "+") {
+        let positionStart = this.position.copy();
         tokens.push(new Token(TokenTypes.PLUS, null, this.position));
         this.advance();
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'+=' isn't supported`
+            )
+          };
       } else if (this.currentChar === "-") {
+        let positionStart = this.position.copy();
         tokens.push(new Token(TokenTypes.MINUS, null, this.position));
         this.advance();
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'-=' isn't supported`
+            )
+          };
       } else if (this.currentChar === "*") {
+        let positionStart = this.position.copy();
         this.advance();
-        if (this.currentChar === "*") {
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'*=' isn't supported`
+            )
+          };
+        else if (this.currentChar === "*") {
           tokens.push(new Token(TokenTypes.POW, null, this.position));
           this.advance();
         } else
           tokens.push(new Token(TokenTypes.MUL, null, this.position));
       } else if (this.currentChar === "/") {
+        let positionStart = this.position.copy();
         tokens.push(new Token(TokenTypes.DIV, null, this.position));
         this.advance();
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'/=' isn't supported`
+            )
+          };
       } else if (this.currentChar === "%") {
+        let positionStart = this.position.copy();
         tokens.push(new Token(TokenTypes.MOD, null, this.position));
         this.advance();
+        if (this.currentChar === "=")
+          return {
+            tokens: null,
+            error: new illegalCharError(
+              positionStart,
+              this.position,
+              `'%=' isn't supported`
+            )
+          };
       } else if (this.currentChar === "(") {
         tokens.push(new Token(TokenTypes.LPAREN, null, this.position));
         this.advance();
@@ -13480,7 +13530,8 @@ class Parser {
     } else if (this.currentToken.type == TokenTypes.IDENTIFIER) {
       response.registerAdvancement();
       this.advance();
-      if (this.currentToken.type === TokenTypes.LSQUARE) {
+      let accessNode = new VarAccessNode(token2);
+      while (this.currentToken.type === TokenTypes.LSQUARE) {
         response.registerAdvancement();
         this.advance();
         let expr = response.register(this.expr());
@@ -13489,13 +13540,11 @@ class Parser {
         if (this.currentToken.type == TokenTypes.RSQUARE) {
           response.registerAdvancement();
           this.advance();
-          return response.success(
-            new IndexAccessNode(
-              new VarAccessNode(token2),
-              expr,
-              token2.positionStart,
-              this.currentToken.positionEnd
-            )
+          accessNode = new IndexAccessNode(
+            accessNode,
+            expr,
+            token2.positionStart,
+            this.currentToken.positionEnd
           );
         } else {
           return response.failure(
@@ -13507,7 +13556,7 @@ class Parser {
           );
         }
       }
-      return response.success(new VarAccessNode(token2));
+      return response.success(accessNode);
     } else if (this.currentToken.type == TokenTypes.LPAREN) {
       response.registerAdvancement();
       this.advance();
@@ -13852,6 +13901,7 @@ class Parser {
     }
     response.registerAdvancement();
     this.advance();
+    response.register(this.continueIfNewLine());
     if (this.currentToken.type == TokenTypes.RSQUARE) {
       response.registerAdvancement();
       this.advance();
@@ -13869,10 +13919,12 @@ class Parser {
       while (this.currentToken.type == TokenTypes.COMMA) {
         response.registerAdvancement();
         this.advance();
+        response.register(this.continueIfNewLine());
         elementNodes.push(response.register(this.expr()));
         if (response.error)
           return response;
       }
+      response.register(this.continueIfNewLine());
       if (this.currentToken.type != TokenTypes.RSQUARE) {
         return response.failure(
           new InvalidSyntaxError(
@@ -14165,6 +14217,9 @@ const Playground = () => {
     let orignalConsoleLog = console.log;
     const outputList = [];
     let isExecusionSuccess = true;
+    console.log = function(...args) {
+      outputList.push({ value: args.join("\n"), isError: false });
+    };
     let { result, error } = interpret(code, input.split("\n"));
     if (error) {
       isExecusionSuccess = false;
@@ -14247,7 +14302,8 @@ const snippets = [
     description: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       "Syntax rules of ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "Fluent" }),
-      "."
+      ".",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-600 italic", children: "Note: '+=', '-=', '%=', '/=', '*=' are currently not supported." })
     ] }),
     code: `
 # single line comments can be made using #
@@ -14302,7 +14358,8 @@ keywords = ["and", "or", "not", "if", "else", "while", "for", "step", "until", "
     description: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       "Operations that can be performed on data type ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "string" }),
-      "."
+      ".",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-600 italic", children: 'Note: re-assigning at index currently not supported. str[1] = "s";' })
     ] }),
     code: `
 # Concat 2 strings
@@ -14327,7 +14384,8 @@ print(str3); # lllll5
     description: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
       "Operations that can be performed on data type ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "list" }),
-      "."
+      ".",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-600 italic", children: "Note: re-assigning at index currently not supported. list[1] = 1;" })
     ] }),
     code: `
 # Add element in a list
