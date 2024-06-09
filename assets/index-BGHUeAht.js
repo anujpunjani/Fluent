@@ -13048,7 +13048,7 @@ class Lexer {
     let identifer = "";
     let positionStart = this.position.copy();
     let letterNumbers = constants.letters + constants.numbers;
-    while (this.currentChar != null && letterNumbers.includes(this.currentChar)) {
+    while (this.currentChar != null && (letterNumbers.includes(this.currentChar) || this.currentChar === "_")) {
       identifer += this.currentChar;
       this.advance();
     }
@@ -14165,9 +14165,6 @@ const Playground = () => {
     let orignalConsoleLog = console.log;
     const outputList = [];
     let isExecusionSuccess = true;
-    console.log = function(...args) {
-      outputList.push({ value: args.join("\n"), isError: false });
-    };
     let { result, error } = interpret(code, input.split("\n"));
     if (error) {
       isExecusionSuccess = false;
