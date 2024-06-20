@@ -7632,7 +7632,7 @@ const Header = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "a",
           {
-            href: "https://github.com/anujpunjani/",
+            href: "https://anujpunjani.github.io/Portfolio/",
             target: "_blank",
             className: "hover:text-[var(--brand)] hover:underline",
             children: "@anujpunjani"
